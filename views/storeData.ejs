@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Data</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<div class="container">
+    <h2>Orders in the database:</h2>
+    <% results.toString() %>
+    <ul>
+        <% results.forEach(function(r) { %>
+        <li>Customer ID: <%= r.CUSTOMER_ID %></li>
+        <ul>
+            <li>Billing ID:<%=r.BILLING_ID %> </li>
+            <li>Date: <%=r.DATE %> </li>
+            <li>Order ID: <%=r.ORDER_ID %> </li>
+            <li>Order Total: <%=r.ORDER_TOTAL %> </li>
+            <li>Product Vector: <%=r.PRODUCT_VECTOR %> </li>
+            <li>Shipping ID: <%=r.SHIPPING_ID %> </li>
+            <li>ID: <%=r._id %> </li>
+        </ul>
+        <br/><br/>
+        <% }); %>
+    </ul>
+</div>
+
+</body>
+</html>
