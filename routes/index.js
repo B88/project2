@@ -7,6 +7,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Bryce\'s Project 2' });
 });
 
-router.get("/storeData", controller.storeData);
+router.post("/storeData", controller.storeData);
 
 module.exports = router;
