@@ -9,7 +9,6 @@ router.get('/', function(req, res, next) {
 //LOAD the various controllers
 var Controller = require('../controllers/database'); //load controller codes dealing with mongodb
 
-router.post("/storeData", Controller.storeData);
+//router.post("/storeData", Controller.storeData);
 
 module.exports = router;
-module.exports = app;
