@@ -7,18 +7,17 @@
 <body>
 <div class="container">
     <h2>Orders in the database:</h2>
-    <% results.toString() %>
     <ul>
         <% results.forEach(function(r) { %>
-        <li>Customer ID: <%= r.CUSTOMER_ID %></li>
+        <li>Customer ID: <%= r._id %></li>
         <ul>
-            <li>Billing ID:<%=r.BILLING_ID %> </li>
-            <li>Date: <%=r.DATE %> </li>
-            <li>Order ID: <%=r.ORDER_ID %> </li>
-            <li>Order Total: <%=r.ORDER_TOTAL %> </li>
-            <li>Product Vector: <%=r.PRODUCT_VECTOR %> </li>
-            <li>Shipping ID: <%=r.SHIPPING_ID %> </li>
-            <li>ID: <%=r._id %> </li>
+            <li>First Name:<%=r.FIRSTNAME %> </li>
+            <li>Last Name: <%=r.LASTNAME %> </li>
+            <li>Address: <%=r.STREET %> </li>
+            <li>City: <%=r.CITY %> </li>
+            <li>State: <%=r.STATE %> </li>
+            <li>Zip Code: <%=r.ZIP %> </li>
+            <li>E-mail Address: <%=r.EMAIL %> </li>
         </ul>
         <br/><br/>
         <% }); %>
