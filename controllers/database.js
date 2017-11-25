@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 //to process data sent in on request need body-parser module
 var bodyParser = require('body-parser');
-var path = require('path'); //to work with separtors on any OS including Windows
-var querystring = require('querystring'); //for use in GET Query string of form URI/path?name=value
+//var path = require('path'); //to work with separtors on any OS including Windows
+//var querystring = require('querystring'); //for use in GET Query string of form URI/path?name=value
 router.use(bodyParser.json()); // for parsing application/json
 router.use(bodyParser.urlencoded({extended: true})); // for parsing application/x-www-form-urlencode
 var mongodb = require('mongodb');
@@ -22,12 +22,13 @@ module.exports.storeData = function (req, res) {
          *      for ORDERS we allow the system to autogenerate its  _id
          */
         var customerID = Math.floor((Math.random() * 1000000000000) + 1);
-        var billingID = Math.floor((Math.random() * 1000000000000) + 1);
-        var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
+        //var billingID = Math.floor((Math.random() * 1000000000000) + 1);
+        //var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
         //customer collection operation
         var CUSTOMERS = db.collection('CUSTOMERS');
 
-        var shipment_info = router.get('shipment_info');
+        var info = router.get('/storeData');
+        var shipment_info = info['shipment_info'];
         var customerdata = {
             _id: customerID,
             FIRSTNAME: shipment_info['fname'],
@@ -38,11 +39,12 @@ module.exports.storeData = function (req, res) {
             ZIP: shipment_info['zip'],
             EMAIL: shipment_info['email']
         };
-        CUSTOMERS.insertOne(customerdata, function (err, result) {
+
+        CUSTOMERS.insertOne(customerdata, function (err) {
             if (err) throw err;
         });
 
-        CUSTOMERS.find().toArray(function (err, docs) {
+        CUSTOMERS.find({_id: customerID}).toArray(function (err, docs) {
             if(err) throw err;
             res.render('storeData', {results: docs});
         });
