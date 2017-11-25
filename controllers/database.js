@@ -26,15 +26,15 @@ module.exports.storeData = function (req, res) {
         var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
         //customer collection operation
         var CUSTOMERS = db.collection('CUSTOMERS');
-        var ORDERS = db.collection('ORDERS');
-        var BILLING = db.collection('BILLING');
-        var SHIPPING = db.collection('SHIPPING');
+        //var ORDERS = db.collection('ORDERS');
+        //var BILLING = db.collection('BILLING');
+        //var SHIPPING = db.collection('SHIPPING');
 
         //var order_info = ;
         //var billing_info = ;
         //var shipping_info = ;
 
-        //var body = JSON.stringify(req.body);  //if wanted entire body as JSON
+        var body = JSON.stringify(req.body);  //if wanted entire body as JSON
         //var params = JSON.stringify(req.params);//if wanted parameters
         //var query = req.query;  //if wanted the query
         //var shipment_info =   //retrieve the shipment_info data
@@ -44,13 +44,13 @@ module.exports.storeData = function (req, res) {
 
         var customerdata = {
             CUSTOMER_ID: customerID,
-            FIRSTNAME: req.params.fname,
-            LASTNAME: req.params.lname,
-            STREET: req.params.add1 + ' ' + req.params.add2,
-            CITY: req.params.city,
-            STATE: req.params.state,
-            ZIP: req.params.zip,
-            EMAIL: req.params.email
+            FIRSTNAME: req.body.fname,
+            LASTNAME: req.body.lname,
+            STREET: req.body.add1 + ' ' + req.body.add2,
+            CITY: req.body.city,
+            STATE: req.body.state,
+            ZIP: req.body.zip,
+            EMAIL: req.body.email
         };
 
         CUSTOMERS.insertOne(customer_data, function (err) {
