@@ -65,22 +65,22 @@ module.exports.storeData = function (req, res) {
         var doc_list = [];
         db.collection('CUSTOMERS').find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
             if(err) throw err;
-            doc_list[0] = {results: docs};
+            doc_list.push({results: docs});
         });
 
         db.collection('ORDERS').find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
             if(err) throw err;
-            doc_list[1] = {results: docs};
+            doc_list.push({results: docs});
         });
 
         db.collection('BILLING').find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
             if(err) throw err;
-            doc_list[2] = {results: docs};
+            doc_list.push({results: docs});
         });
 
         db.collection('SHIPPING').find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
             if(err) throw err;
-            doc_list[3] = {results: docs};
+            doc_list.push({results: docs});
         });
 
         res.render('storeData', doc_list);
