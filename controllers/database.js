@@ -34,7 +34,7 @@ module.exports.storeData = function (req, res) {
         //var billing_info = ;
         //var shipping_info = ;
 
-        var body = JSON.stringify(req.body);  //if wanted entire body as JSON
+        //var body = JSON.stringify(req.body);  //if wanted entire body as JSON
         //var params = JSON.stringify(req.params);//if wanted parameters
         //var query = req.query;  //if wanted the query
         //var shipment_info =   //retrieve the shipment_info data
@@ -42,7 +42,7 @@ module.exports.storeData = function (req, res) {
         //var shipment_info = [];
         //shipment_info['fname'] = req.getParameter(params['info']);
 
-        var customerdata = {
+        var customer_data = {
             CUSTOMER_ID: customerID,
             FIRSTNAME: req.body.fname,
             LASTNAME: req.body.lname,
