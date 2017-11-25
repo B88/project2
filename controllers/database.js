@@ -93,7 +93,7 @@ module.exports.storeData = function (req, res) {
             res.render('storeData', {results: docs});
         });
 */
-        CUSTOMERS.find().toArray(function (err, docs) {
+        CUSTOMERS.find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
             if(err) throw err;
             res.render('storeData', {results: docs});
         });
