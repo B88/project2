@@ -28,7 +28,7 @@ module.exports.storeData = function (req, res) {
             BILLING_ID: billingID,
             DATE: today,
             ORDER_TOTAL: req.body.total,
-            //PRODUCT_VECTOR: req.body.prodv,
+            PRODUCT_VECTOR: req.body.prodv,
             SHIPPING_ID: shippingID
         };
         var billing_data = {
@@ -48,19 +48,19 @@ module.exports.storeData = function (req, res) {
         };
 
         //insert data into databases
-        db.collection('CUSTOMERS').insertOne(customer_data, function (err) {
-            if (err) throw err;
-        });
+//        db.collection('CUSTOMERS').insertOne(customer_data, function (err) {
+//            if (err) throw err;
+//        });
         db.collection('ORDERS').insertOne(order_data, function (err) {
             if (err) throw err;
         });
-        db.collection('BILLING').insertOne(billing_data, function (err) {
+/*        db.collection('BILLING').insertOne(billing_data, function (err) {
             if (err) throw err;
         });
         db.collection('SHIPPING').insertOne(shipping_data, function (err) {
             if (err) throw err;
         });
-
+*/
         //Retrieve newly stored data for confirmation page
         db.collection('CUSTOMERS').find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
             if(err) throw err;
