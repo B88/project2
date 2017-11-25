@@ -26,6 +26,13 @@ module.exports.storeData = function (req, res) {
         var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
         //customer collection operation
         var CUSTOMERS = db.collection('CUSTOMERS');
+        var ORDERS = db.collection('ORDERS');
+        var BILLING = db.collection('BILLING');
+        var SHIPPING = db.collection('SHIPPING');
+
+        //var order_info = ;
+        //var billing_info = ;
+        //var shipping_info = ;
 
         //var body = JSON.stringify(req.body);  //if wanted entire body as JSON
         var params = JSON.stringify(req.params);//if wanted parameters
@@ -36,20 +43,56 @@ module.exports.storeData = function (req, res) {
         //shipment_info['fname'] = req.getParameter(params['info']);
 
         var customerdata = {
-            _id: customerID,
-            FIRSTNAME: shipment_info['fname'],
-            LASTNAME: shipment_info['lname'],
-            STREET: shipment_info['add1'] + ' ' + shipment_info['add2'],
-            CITY: shipment_info['city'],
-            STATE: shipment_info['state'],
-            ZIP: shipment_info['zip'],
-            EMAIL: shipment_info['email']
+            CUSTOMER_ID: customerID,
+            FIRSTNAME: params['fname'],
+            LASTNAME: params['lname'],
+            STREET: params['add1'] + ' ' + params['add2'],
+            CITY: params['city'],
+            STATE: params['state'],
+            ZIP: params['zip'],
+            EMAIL: params['email']
         };
 
-        CUSTOMERS.insertOne(customerdata, function (err) {
+        CUSTOMERS.insertOne(customer_data, function (err) {
             if (err) throw err;
         });
 
+        /*var orderdata = {
+            CUSTOMER_ID: customerID,
+            BILLING_ID: billingID,
+            DATE: billing_info[''],
+            ORDER_TOTAL: ,
+            PRODUCT_VECTOR: ,
+            SHIPPING_ID: shippingID
+        }
+
+        var billingdata = {
+            CUSTOMER_ID: customerID,
+
+        }
+
+        var shippingdata = {
+            CUSTOMER_ID: customerID,
+
+        }
+
+        ORDERS.insertOne(order_data, function (err) {
+            if (err) throw err;
+        })
+
+        BILLING.insertOne(billing_data, function (err) {
+            if (err) throw err;
+        })
+
+        SHIPPING.insertOne(shipping_data, function (err) {
+            if (err) throw err;
+        })
+
+        CUSTOMERS.find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
+            if(err) throw err;
+            res.render('storeData', {results: docs});
+        });
+*/
         CUSTOMERS.find().toArray(function (err, docs) {
             if(err) throw err;
             res.render('storeData', {results: docs});
