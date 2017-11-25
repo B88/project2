@@ -28,13 +28,12 @@ module.exports.storeData = function (req, res) {
             BILLING_ID: billingID,
             DATE: today,
             ORDER_TOTAL: req.body.total,
-            PRODUCT_VECTOR: req.body.prodv,
+            //PRODUCT_VECTOR: req.body.prodv,
             SHIPPING_ID: shippingID
         };
         var billing_data = {
             CUSTOMER_ID: customerID,
-            CREDITCARDNAME: req.body.ccn
-            CREDITCARDDATE: req.body.ccd,
+            CREDITCARDNAME: req.body.ccn,
             CREDITCARDEXP: req.body.cce,
             CREDITCARDNUM: req.body.cc,
             CREDITCARDSECURITYNUM: req.body.ccsn,
@@ -52,7 +51,7 @@ module.exports.storeData = function (req, res) {
         db.collection('CUSTOMERS').insertOne(customer_data, function (err) {
             if (err) throw err;
         });
-/*        db.collection('ORDERS').insertOne(order_data, function (err) {
+        db.collection('ORDERS').insertOne(order_data, function (err) {
             if (err) throw err;
         });
         db.collection('BILLING').insertOne(billing_data, function (err) {
@@ -61,7 +60,7 @@ module.exports.storeData = function (req, res) {
         db.collection('SHIPPING').insertOne(shipping_data, function (err) {
             if (err) throw err;
         });
-*/
+
         //Retrieve newly stored data for confirmation page
         db.collection('CUSTOMERS').find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
             if(err) throw err;
