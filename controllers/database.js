@@ -30,7 +30,8 @@ module.exports.storeData = function (req, res) {
         //var body = JSON.stringify(req.body);  //if wanted entire body as JSON
         //var params = JSON.stringify(req.params);//if wanted parameters
         //var query = req.query;  //if wanted the query
-        var shipment_info = req.params.get('shipment_info');  //retrieve the shipment_info data
+        var shipment_info = [];
+        shipment_info['fname'] = req.params.get('info');  //retrieve the shipment_info data
 
         var customerdata = {
             _id: customerID,
