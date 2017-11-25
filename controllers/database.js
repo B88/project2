@@ -29,10 +29,10 @@ module.exports.storeData = function (req, res) {
 
 
         //var body = JSON.stringify(req.body);  //if wanted entire body as JSON
-        var params = JSON.stringify(req.params);//if wanted parameters
-        var shipment_info = params['shipment_info'];  //retrieve the data associated with shipment_info
+        //var params = JSON.stringify(req.params);//if wanted parameters
+        //var shipment_info = params['shipment_info'];  //retrieve the data associated with shipment_info
 
-        res.render('storeData', shipment_info);
+        //res.render('storeData', shipment_info);
 
         /*var customerdata = {
             _id: customerID,
@@ -48,11 +48,11 @@ module.exports.storeData = function (req, res) {
         CUSTOMERS.insertOne(customerdata, function (err) {
             if (err) throw err;
         });
-
-        CUSTOMERS.find({_id: customerID}).toArray(function (err, docs) {
+*/
+        CUSTOMERS.find().toArray(function (err, docs) {
             if(err) throw err;
             res.render('storeData', {results: docs});
-        });*/
+        });
 
         //close connection when your app is terminating.
         db.close(function (err) {
