@@ -27,16 +27,10 @@ module.exports.storeData = function (req, res) {
         //customer collection operation
         var CUSTOMERS = db.collection('CUSTOMERS');
 
-
         //var body = JSON.stringify(req.body);  //if wanted entire body as JSON
-        //var params = JSON.stringify(req.params);//if wanted parameters
-        //var shipment_info = params['shipment_info'];  //retrieve the data associated with shipment_info
-        //res.render('storeData', shipment_info);
-
-        var body = JSON.stringify(req.body);  //if wanted entire body as JSON
         var params = JSON.stringify(req.params);//if wanted parameters
-        var query = req.query;  //if wanted the query
-        var shipment_info = {req: params};  //retrieve the data associated with name
+        //var query = req.query;  //if wanted the query
+        var shipment_info = req.getParameter('shipment_info');  //retrieve the data associated with name
 
         var customerdata = {
             _id: customerID,
