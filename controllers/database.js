@@ -3,7 +3,7 @@ var router = express.Router();
 //to process data sent in on request need body-parser module
 var bodyParser = require('body-parser');
 //var path = require('path'); //to work with separtors on any OS including Windows
-//var querystring = require('querystring'); //for use in GET Query string of form URI/path?name=value
+var querystring = require('querystring'); //for use in GET Query string of form URI/path?name=value
 router.use(bodyParser.json()); // for parsing application/json
 router.use(bodyParser.urlencoded({extended: true})); // for parsing application/x-www-form-urlencode
 var mongodb = require('mongodb');
@@ -28,9 +28,9 @@ module.exports.storeData = function (req, res) {
         var CUSTOMERS = db.collection('CUSTOMERS');
 
 
-        //var body = JSON.stringify(req.body);  //if wanted entire body as JSON
+        var body = JSON.stringify(req.body);  //if wanted entire body as JSON
         var params = JSON.stringify(req.params);//if wanted parameters
-        var shipment_info = params['shipment_info'];  //retrieve the data associated with shipment_info
+        var shipment_info = body['shipment_info'];  //retrieve the data associated with shipment_info
 
 
         var customerdata = {
