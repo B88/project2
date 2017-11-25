@@ -4,8 +4,8 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var path = require('path'); //to work with separtors on any OS including Windows
 var querystring = require('querystring'); //for use in GET Query string of form URI/path?name=value
-//router.use(bodyParser.json()); // for parsing application/json
-//router.use(bodyParser.urlencoded({extended: true})); // for parsing application/x-www-form-urlencode
+router.use(bodyParser.json()); // for parsing application/json
+router.use(bodyParser.urlencoded({extended: true})); // for parsing application/x-www-form-urlencode
 var mongodb = require('mongodb');
 var mongoDBURI = process.env.MONGODB_URI || 'mongodb://Bryce:lavalamp@ds064198.mlab.com:64198/proj2';
 
@@ -28,10 +28,12 @@ module.exports.storeData = function (req, res) {
         var CUSTOMERS = db.collection('CUSTOMERS');
 
         //var body = JSON.stringify(req.body);  //if wanted entire body as JSON
-        //var params = JSON.stringify(req.params);//if wanted parameters
+        var params = JSON.stringify(req.params);//if wanted parameters
         //var query = req.query;  //if wanted the query
+        //var shipment_info = req.params.get('shipment_info');  //retrieve the shipment_info data
+
         var shipment_info = [];
-        shipment_info['fname'] = req.params.get('info');  //retrieve the shipment_info data
+        shipment_info['fname'] = req.getParameter(params['info']);
 
         var customerdata = {
             _id: customerID,
