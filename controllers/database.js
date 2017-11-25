@@ -48,21 +48,22 @@ module.exports.storeData = function (req, res) {
         };
 
         //insert data into databases
-//        db.collection('CUSTOMERS').insertOne(customer_data, function (err) {
-//            if (err) throw err;
-//        });
+        db.collection('CUSTOMERS').insertOne(customer_data, function (err) {
+            if (err) throw err;
+        });
         db.collection('ORDERS').insertOne(order_data, function (err) {
             if (err) throw err;
         });
-/*        db.collection('BILLING').insertOne(billing_data, function (err) {
+        db.collection('BILLING').insertOne(billing_data, function (err) {
             if (err) throw err;
         });
         db.collection('SHIPPING').insertOne(shipping_data, function (err) {
             if (err) throw err;
         });
-*/
+
         //Retrieve newly stored data for confirmation page
-        db.collection('CUSTOMERS').find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
+        var colls = [db.collection('CUSTOMERS'),db.collection('ORDERS'),db.collection('BILLING'),db.collection('SHIPPING')];
+        colls.find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
             if(err) throw err;
             res.render('storeData', {results: docs});
         });
