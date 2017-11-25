@@ -26,7 +26,7 @@ module.exports.storeData = function (req, res) {
         var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
         //customer collection operation
         var CUSTOMERS = db.collection('CUSTOMERS');
-/*
+
         var shipment_info = router.get('shipment_info');
         var customerdata = {
             _id: customerID,
@@ -41,7 +41,7 @@ module.exports.storeData = function (req, res) {
         CUSTOMERS.insertOne(customerdata, function (err, result) {
             if (err) throw err;
         });
-*/
+
         CUSTOMERS.find().toArray(function (err, docs) {
             if(err) throw err;
             res.render('storeData', {results: docs});
