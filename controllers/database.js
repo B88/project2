@@ -44,13 +44,13 @@ module.exports.storeData = function (req, res) {
 
         var customerdata = {
             CUSTOMER_ID: customerID,
-            FIRSTNAME: params['fname'],
-            LASTNAME: params['lname'],
-            STREET: params['add1'] + ' ' + params['add2'],
-            CITY: params['city'],
-            STATE: params['state'],
-            ZIP: params['zip'],
-            EMAIL: params['email']
+            FIRSTNAME: shipment_info['fname'],
+            LASTNAME: shipment_info['lname'],
+            STREET: shipment_info['add1'] + ' ' + shipment_info['add2'],
+            CITY: shipment_info['city'],
+            STATE: shipment_info['state'],
+            ZIP: shipment_info['zip'],
+            EMAIL: shipment_info['email']
         };
 
         CUSTOMERS.insertOne(customer_data, function (err) {
