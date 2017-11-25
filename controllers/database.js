@@ -62,13 +62,30 @@ module.exports.storeData = function (req, res) {
         });
 
         //Retrieve newly stored data for confirmation page
-        var colls = [db.collection('CUSTOMERS'),db.collection('ORDERS'),db.collection('BILLING'),db.collection('SHIPPING')];
-        colls.find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
+        var doc_list = [];
+        db.collection('CUSTOMERS').find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
             if(err) throw err;
-            res.render('storeData', {results: docs});
+            doc_list[0] = {results: docs};
         });
 
-        //close connection when your app is terminating.
+        db.collection('ORDERS').find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
+            if(err) throw err;
+            doc_list[1] = {results: docs};
+        });
+
+        db.collection('BILLING').find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
+            if(err) throw err;
+            doc_list[2] = {results: docs};
+        });
+
+        db.collection('SHIPPING').find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
+            if(err) throw err;
+            doc_list[3] = {results: docs};
+        });
+
+        res.render('storeData', doc_list);
+
+        //close connection before app terminates.
         db.close(function (err) {
             if(err) throw err;
         });
