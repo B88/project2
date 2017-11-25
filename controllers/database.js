@@ -35,22 +35,22 @@ module.exports.storeData = function (req, res) {
         //var shipping_info = ;
 
         //var body = JSON.stringify(req.body);  //if wanted entire body as JSON
-        var params = JSON.stringify(req.params);//if wanted parameters
+        //var params = JSON.stringify(req.params);//if wanted parameters
         //var query = req.query;  //if wanted the query
-        var shipment_info = {req: params};  //retrieve the shipment_info data
+        //var shipment_info =   //retrieve the shipment_info data
 
         //var shipment_info = [];
         //shipment_info['fname'] = req.getParameter(params['info']);
 
         var customerdata = {
             CUSTOMER_ID: customerID,
-            FIRSTNAME: shipment_info['fname'],
-            LASTNAME: shipment_info['lname'],
-            STREET: shipment_info['add1'] + ' ' + shipment_info['add2'],
-            CITY: shipment_info['city'],
-            STATE: shipment_info['state'],
-            ZIP: shipment_info['zip'],
-            EMAIL: shipment_info['email']
+            FIRSTNAME: req.body.fname,
+            LASTNAME: req.body.lname,
+            STREET: req.body.add1 + ' ' + req.body.add2,
+            CITY: req.body.city,
+            STATE: req.body.state,
+            ZIP: req.body.zip,
+            EMAIL: req.body.email
         };
 
         CUSTOMERS.insertOne(customer_data, function (err) {
