@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 //to process data sent in on request need body-parser module
 var bodyParser = require('body-parser');
-//var path = require('path'); //to work with separtors on any OS including Windows
+var path = require('path'); //to work with separtors on any OS including Windows
 var querystring = require('querystring'); //for use in GET Query string of form URI/path?name=value
 router.use(bodyParser.json()); // for parsing application/json
 router.use(bodyParser.urlencoded({extended: true})); // for parsing application/x-www-form-urlencode
@@ -22,8 +22,8 @@ module.exports.storeData = function (req, res) {
          *      for ORDERS we allow the system to autogenerate its  _id
          */
         var customerID = Math.floor((Math.random() * 1000000000000) + 1);
-        //var billingID = Math.floor((Math.random() * 1000000000000) + 1);
-        //var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
+        var billingID = Math.floor((Math.random() * 1000000000000) + 1);
+        var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
         //customer collection operation
         var CUSTOMERS = db.collection('CUSTOMERS');
 
@@ -31,10 +31,10 @@ module.exports.storeData = function (req, res) {
         //var body = JSON.stringify(req.body);  //if wanted entire body as JSON
         //var params = JSON.stringify(req.params);//if wanted parameters
         //var shipment_info = params['shipment_info'];  //retrieve the data associated with shipment_info
-
+var shipment_info;
         //res.render('storeData', shipment_info);
 
-        /*var customerdata = {
+        var customerdata = {
             _id: customerID,
             FIRSTNAME: shipment_info['fname'],
             LASTNAME: shipment_info['lname'],
@@ -48,7 +48,7 @@ module.exports.storeData = function (req, res) {
         CUSTOMERS.insertOne(customerdata, function (err) {
             if (err) throw err;
         });
-*/
+
         CUSTOMERS.find().toArray(function (err, docs) {
             if(err) throw err;
             res.render('storeData', {results: docs});
@@ -60,5 +60,3 @@ module.exports.storeData = function (req, res) {
         });
     });
 };
-
-module.exports = router;
