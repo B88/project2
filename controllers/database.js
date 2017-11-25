@@ -26,9 +26,13 @@ module.exports.storeData = function (req, res) {
         //var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
         //customer collection operation
         var CUSTOMERS = db.collection('CUSTOMERS');
-/*
-        var info = router.get('/storeData');
-  */      var shipment_info = info['shipment_info'];
+
+
+        //var body = JSON.stringify(req.body);  //if wanted entire body as JSON
+        var params = JSON.stringify(req.params);//if wanted parameters
+        var shipment_info = params['shipment_info'];  //retrieve the data associated with shipment_info
+
+
         var customerdata = {
             _id: customerID,
             FIRSTNAME: shipment_info['fname'],
