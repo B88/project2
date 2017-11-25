@@ -30,10 +30,11 @@ module.exports.storeData = function (req, res) {
 
         var body = JSON.stringify(req.body);  //if wanted entire body as JSON
         var params = JSON.stringify(req.params);//if wanted parameters
-        var shipment_info = body['shipment_info'];  //retrieve the data associated with shipment_info
+        var shipment_info = params['shipment_info'];  //retrieve the data associated with shipment_info
 
+        res.render(shipment_info);
 
-        var customerdata = {
+        /*var customerdata = {
             _id: customerID,
             FIRSTNAME: shipment_info['fname'],
             LASTNAME: shipment_info['lname'],
@@ -51,7 +52,7 @@ module.exports.storeData = function (req, res) {
         CUSTOMERS.find({_id: customerID}).toArray(function (err, docs) {
             if(err) throw err;
             res.render('storeData', {results: docs});
-        });
+        });*/
 
         //close connection when your app is terminating.
         db.close(function (err) {
@@ -59,3 +60,5 @@ module.exports.storeData = function (req, res) {
         });
     });
 };
+
+module.exports = router;
