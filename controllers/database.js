@@ -1,7 +1,9 @@
 var mongodb = require('mongodb');
 var mongoDBURI = process.env.MONGODB_URI || 'mongodb://Bryce:lavalamp@ds064198.mlab.com:64198/proj2';
 
+//storeData function
 module.exports.storeData = function (req, res) {
+    //connect to mongodb
     mongodb.MongoClient.connect(mongoDBURI, function (err, db) {
         if (err) throw err;
         //Generate random numbers for CUSTOMER_ID, BILLING_ID and SHIPPING_ID
@@ -10,7 +12,7 @@ module.exports.storeData = function (req, res) {
         var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
         //Get date
         var date = new Date();
-        var today = (date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear();
+        var today = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
 
         //organize post data for database insertion
         var customer_data = {
@@ -61,29 +63,8 @@ module.exports.storeData = function (req, res) {
             if (err) throw err;
         });
 
-        //Retrieve newly stored data for confirmation page
-        var doc_list = [];
-        db.collection('CUSTOMERS').find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
-            if(err) throw err;
-            doc_list.push({results: docs});
-        });
-
-        db.collection('ORDERS').find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
-            if(err) throw err;
-            doc_list.push({results: docs});
-        });
-
-        db.collection('BILLING').find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
-            if(err) throw err;
-            doc_list.push({results: docs});
-        });
-
-        db.collection('SHIPPING').find({CUSTOMER_ID: customerID}).toArray(function (err, docs) {
-            if(err) throw err;
-            doc_list.push({results: docs});
-        });
-
-        res.render('storeData', doc_list);
+        //return the rendered storeData views file
+        res.render('storeData');
 
         //close connection before app terminates.
         db.close(function (err) {
